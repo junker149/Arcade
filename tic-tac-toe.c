@@ -115,5 +115,14 @@ char checkWin(char arr[][3]){
         return arr[0][2];
     }
 
+    // Draw Condition
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < i; j++)
+        {
+            
+        }
+    }
+
     return ' ';
 }
