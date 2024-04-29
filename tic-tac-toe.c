@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void initGrid(char[][3]);
 void printGrid(char[][3]);
@@ -18,7 +19,7 @@ int main(){
     // Player loop
     char winner;
     char player = 'X';
-    while(winner != 'X' && winner != 'O')
+    while(winner != 'X' && winner != 'O' && winner != 'D')
     {
         int position;
         if(player == 'X')
@@ -42,7 +43,12 @@ int main(){
         player = 'X';
         winner = checkWin(grid);
     }
+    if(winner == 'D'){
+        printf("The game is drawn!");
+        return 0;
+    }
     printf("The winner is : player %c", winner);
+    return 0;
 }
 
 void initGrid(char arr[][3]){
@@ -56,6 +62,7 @@ void initGrid(char arr[][3]){
 }
 
 void printGrid(char arr[][3]){
+    system("cls");
     for(int i = 0; i < 3; i++)
     {
         for(int j = 0; j < 3; j++)
@@ -115,14 +122,27 @@ char checkWin(char arr[][3]){
         return arr[0][2];
     }
 
-    // Draw Condition
+    // Draw condition
+    int draw = 1;
     for(int i = 0; i < 3; i++)
     {
-        for(int j = 0; j < i; j++)
+        for(int j = 0; j < 3; j++)
         {
-            
+            if(arr[i][j] == ' ')
+            {
+                draw = 0;
+                break;
+            }
+        }
+        if(draw == 0)
+        {
+            break;
         }
     }
+    if(draw)
+    {
+        return 'D'; // Return 'D' for draw
+    }
 
-    return ' ';
+    return ' '; // No winner yet
 }
